@@ -1,16 +1,31 @@
 ---
-
+import DefaultPageLayout from "../layouts/default.astro";
+import PostPreviewList from "../components/PostPreviewList.astro";
+import HeroContent from "../components/HeroContent.astro";
+import { getPosts, getSettings, invariant } from "@matthiesenxyz/astro-ghostcms/api";
+const { posts } = await getPosts();
+const settings = await getSettings();
+invariant(settings, 'Settings not found');
+const title = settings.title;
+const description = settings.description;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<DefaultPageLayout
+  content={{ title, description }}
+  settings={settings}
+  bodyClass={"home-template"}
+>
+  <HeroContent
+    mainTitle={settings.title}
+    description={settings.description}
+    featureImg={settings?.cover_image || ""}
+    settings={settings}
+    addClass={"hero-cta bg-gradient"}
+  />
+
+  <main id="site-main" class="site-main outer">
+    <div class="inner posts">
+      <PostPreviewList posts={posts} settings={settings} isHome={true} />
+    </div>
+  </main>
+</DefaultPageLayout>

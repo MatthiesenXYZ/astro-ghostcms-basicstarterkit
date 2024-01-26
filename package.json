@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "astro-ghostcms-basic-starterkit",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,7 +11,12 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
+    "@matthiesenxyz/astro-ghostcms": "^3.1.4",
     "astro": "^4.2.4",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "astro-font": "^0.0.77"
+  },
+  "devDependencies": {
+    "sass": "^1.70.0"
   }
 }
